@@ -589,7 +589,9 @@ def run(num=None):
 				
 				# Handle various status conditions, as required
 				if 'status' in r:
-					if r.status == 301: f.url = r['url']
+					if r.status == 301:
+						print >>warn, "W: feed moved; updating", f.url, "to", r['url']
+						f.url = r['url']
 					elif r.status == 410:
 						print >>warn, "W: feed gone; deleting", f.url
 						feeds.remove(f)
